@@ -25,5 +25,6 @@ namespace STCAPI.DataLayer
         public virtual DbSet<StreamMaster> StreamMasters { get; set; }
         public virtual DbSet<BIPortalSecurityMaster> BIPortalSecurityMasters { get; set; }
         public virtual DbSet<QlikDataAccess> QlikDataAccesses { get; set; }
+        public virtual DbSet<UserPortalAccess> UserPortalAccesses { get; set; }
     }
 }

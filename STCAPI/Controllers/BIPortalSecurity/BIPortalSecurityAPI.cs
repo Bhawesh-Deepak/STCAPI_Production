@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ExcelReaderHelper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using STCAPI.DataLayer.BIPortalSecurity;
+using STCAPI.ReqRespVm.RequestModel;
 using STCAPI.ServiceLayer;
 using System;
 using System.Collections.Generic;
@@ -38,5 +40,33 @@ namespace STCAPI.Controllers.BIPortalSecurity
             var response = await _IBIPortalSecurityMasterRepository.GetAllEntities(x => x.IsActive && !x.IsDeleted);
             return Ok(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadPortalMenu([FromForm] UplaodPortalMenu model)
+        {
+            var excelResponse = new ReadExcelData().ConvertExcelToDat(model.InputFile);
+
+            List<BIPortalSecurityMaster> models = new List<BIPortalSecurityMaster>();
+
+
+            excelResponse.Item2.ForEach(data => {
+                var model = new BIPortalSecurityMaster();
+                model.StageName = data.StageName;
+                model.MainStreamName = data.MainStream;
+                model.StreamLongName = data.StreamLongName;
+                model.StreamName = data.Stream;
+                model.ObjectType = data.ObjectType;
+                model.ObjectTypeName = data.ObjectTypeName;
+                model.URL = data.URL;
+                model.CreatedBy = "Admin";
+
+                models.Add(model);
+            });
+
+            var response = await _IBIPortalSecurityMasterRepository.CreateEntities(models.ToArray());
+            return Ok(response);
+
+        }
+
     }
 }
