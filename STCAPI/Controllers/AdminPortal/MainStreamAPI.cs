@@ -31,13 +31,13 @@ namespace STCAPI.Controllers.AdminPortal
         [Consumes("application/json")]
         public async Task<IActionResult> CreateMainStream(MainStreamMaster model)
         {
-            var responsedetail = await _IMainsStreamRepository.CreateEntity(model);
+            var response = await _IMainsStreamRepository.CreateEntity(model);
 
-            if (responsedetail.ResponseStatus == System.Net.HttpStatusCode.Created)
+            if (response.ResponseStatus == System.Net.HttpStatusCode.Created)
             {
-                return Ok(responsedetail);
+                return Ok(response);
             }
-            return BadRequest(responsedetail);
+            return BadRequest(response);
         }
 
         [HttpGet]
