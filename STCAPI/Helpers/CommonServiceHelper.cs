@@ -27,5 +27,19 @@ namespace STCAPI.Helpers
 
             return response;
         }
+        public  static List<StreamDetailVm> GetStreamDetails(ResponseModel<MainStreamMaster> mainStreamData, ResponseModel<StreamMaster> streamData)
+        {
+            return (from mainData in mainStreamData.TEntities
+                    join strData in streamData.TEntities
+                    on mainData.Id equals strData.MainStreamId
+                    select new StreamDetailVm
+                    {
+                        MainStreamName = mainData.Name,
+                        Name = strData.Name,
+                        LongName = strData.LongName,
+                        ShortName = strData.ShortName,
+                        Description = strData.Description
+                    }).ToList();
+        }
     }
 }

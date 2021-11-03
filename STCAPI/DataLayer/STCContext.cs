@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using STCAPI.Controllers.AdminPortal;
 using STCAPI.DataLayer.AdminPortal;
-
+using STCAPI.DataLayer.BIPortalSecurity;
 
 namespace STCAPI.DataLayer
 {
@@ -21,5 +21,9 @@ namespace STCAPI.DataLayer
             
         public virtual DbSet<StageMaster> StageMasters { get; set; }
         public virtual DbSet<MainStreamMaster> MainStreamMasters { get; set; }
+        public virtual DbSet<RawDataStream> RawDataStreams { get; set; }
+        public virtual DbSet<StreamMaster> StreamMasters { get; set; }
+        public virtual DbSet<BIPortalSecurityMaster> BIPortalSecurityMasters { get; set; }
+        public virtual DbSet<QlikDataAccess> QlikDataAccesses { get; set; }
     }
 }

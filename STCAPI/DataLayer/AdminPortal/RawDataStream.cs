@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace STCAPI.DataLayer.AdminPortal
 {
-    [Table("streammaster")]
-    public class StreamMaster:BaseModel<int>
+    [Table("RawDataStream")]
+    public class RawDataStream:BaseModel<int>
     {
-        public int MainStreamId { get; set; }
+        public int StreamId { get; set; }
         public string Name { get; set; }
         public string LongName { get; set; }
         public string ShortName { get; set; }
